@@ -32,7 +32,7 @@ jobs:
 
 
       - name: Run Gitleaks
-        uses: zrcethezav/gitleaks-action@v2
+        uses: zricethezav/gitleaks-action@v2
 
 
       - name: Build Docker Image
