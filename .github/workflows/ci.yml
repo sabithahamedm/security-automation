@@ -36,7 +36,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y golang
-          go install github.com/gitleaks/gitleaks/v8@latest
+          go install github.com/zricethezav/gitleaks/v8@latest
           export PATH=$PATH:$(go env GOPATH)/bin
           gitleaks version
 
