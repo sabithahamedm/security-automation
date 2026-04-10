@@ -1,0 +1,41 @@
+name :DevSecOps pipeline
+
+on:
+  push:
+    branches:["main"]
+
+
+jobs:
+  security-check:
+    runs-on:ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses:acions/checkout@v3
+
+
+
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      
+      - name: Install Dependencies
+        run: |
+         pip install bandit requests
+
+
+      - name: Run Bandit Scan
+        run: |
+          bandit -r .
+
+
+      - name: Run Gitleaks
+        uses:zrcethezav/gitleaks-action@v2
+
+
+      - name: Build Docker Image
+        run: docker build -t security-automation .
+
+
