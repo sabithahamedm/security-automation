@@ -1,17 +1,17 @@
-name :DevSecOps pipeline
+name: DevSecOps pipeline
 
 on:
   push:
-    branches:["main"]
+    branches: ["main"]
 
 
 jobs:
   security-check:
-    runs-on:ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
-        uses:acions/checkout@v3
+        uses: acions/checkout@v3
 
 
 
@@ -32,7 +32,7 @@ jobs:
 
 
       - name: Run Gitleaks
-        uses:zrcethezav/gitleaks-action@v2
+        uses: zrcethezav/gitleaks-action@v2
 
 
       - name: Build Docker Image
