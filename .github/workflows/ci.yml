@@ -10,8 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: acions/checkout@v3
+      - name: Clone repo manually
+        run: |
+            git clone https://github.com/${{ github.repository }} .
 
 
 
@@ -32,7 +33,10 @@ jobs:
 
 
       - name: Run Gitleaks
-        uses: zricethezav/gitleaks-action@v2
+        run: |
+          wget https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks-linux-amd64 -O gitleaks
+          chmod +x gitleaks
+          ./gitleaks detect --source . --exit-code 1
 
 
       - name: Build Docker Image
