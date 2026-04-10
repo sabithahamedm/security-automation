@@ -32,12 +32,13 @@ jobs:
           bandit -r .
 
 
-      - name: Run Gitleaks (CLI)
+      - name: Install Gitleaks via Go
         run: |
-          wget https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks_$(uname -s)_x64.tar.gz -O gitleaks.tar.gz
-          tar -xzf gitleaks.tar.gz
-          chmod +x gitleaks
-          ./gitleaks detect --source . --exit-code 1
+          sudo apt update
+          sudo apt install -y golang
+          go install github.com/gitleaks/gitleaks/v8@latest
+          export PATH=$PATH:$(go env GOPATH)/bin
+          gitleaks version
 
 
       - name: Build Docker Image
